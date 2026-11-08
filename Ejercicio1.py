@@ -1,5 +1,6 @@
 import sys
-from PyQt6.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QLabel, QComboBox
+from PyQt6.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QLabel, QComboBox, QLineEdit, QCheckBox, QStackedLayout
+
 
 class VentanaPerfil(QMainWindow):
     def __init__(self):
@@ -19,7 +20,50 @@ class VentanaPerfil(QMainWindow):
         contenedor.setLayout(layout_principal)
         self.setCentralWidget(contenedor)
 
+        self.panel_profesor = self.crear_panel_profesores()
+        self.panel_alumno = self.crear_panel_alumnos()
+
+        self.tarjetas = QStackedLayout()
+        self.tarjetas.addWidget(self.panel_profesor)
+        self.tarjetas.addWidget(self.panel_alumno)
+
+        layout_principal.addLayout(self.tarjetas)
+
+        self.cmb_perfil.currentIndexChanged.connect(self.tarjetas.setCurrentIndex)
+
+
         self.show()
+
+    def crear_panel_profesores(self):
+        panel = QWidget()
+        layout = QVBoxLayout()
+        lbl = QLabel("Seccion de profesores")
+        le = QLineEdit()
+        le.setPlaceholderText("Añade la asignatura")
+        ce = QCheckBox("Es tutor")
+        panel.setLayout(layout)
+        layout.addWidget(lbl)
+        layout.addWidget(le)
+        layout.addWidget(ce)
+
+        return panel
+
+    def crear_panel_alumnos(self):
+
+        panel = QWidget()
+        layout = QVBoxLayout()
+        lbl = QLabel("Seccion de alumnos")
+        le = QLineEdit()
+        le.setPlaceholderText("Añade la asignatura")
+        panel.setLayout(layout)
+        layout.addWidget(lbl)
+        layout.addWidget(le)
+
+        return panel
+
+
+
+
 
 
 if __name__ == '__main__':
