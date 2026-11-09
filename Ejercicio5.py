@@ -10,12 +10,14 @@ class TableroGrid(QMainWindow):
         self.setWindowTitle("Tablero Buscaminas 3x3")
         grid_layout = QGridLayout()
 
+        self.botones = []
         for fila in range(3):
             for col in range(3):
                 boton = QPushButton()
                 grid_layout.addWidget(boton, fila, col)
                 boton.setFixedSize(60, 60)
                 boton.clicked.connect(self.revelar_casilla)
+                self.botones.append(boton)
 
 
         contenedor = QWidget()
