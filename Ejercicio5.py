@@ -20,8 +20,18 @@ class TableroGrid(QMainWindow):
                 self.botones.append(boton)
 
 
+        layout_principal = QVBoxLayout()
+        layout_principal.addLayout(grid_layout)
+        self.btn_reiniciar = QPushButton("Reiniciar Tablero")
+        self.btn_reiniciar.clicked.connect(self.reiniciar_tablero)
+        layout_principal.addWidget(self.btn_reiniciar)
+
+
+
+
+
         contenedor = QWidget()
-        contenedor.setLayout(grid_layout)
+        contenedor.setLayout(layout_principal)
         self.setCentralWidget(contenedor)
         self.show()
 
@@ -30,6 +40,11 @@ class TableroGrid(QMainWindow):
         boton_pulsado = self.sender()
         boton_pulsado.setText("X")
         boton_pulsado.setEnabled(False)
+
+    def reiniciar_tablero(self):
+        for boton in self.botones:
+            boton.setText("")
+            boton.setEnabled(True)
 
 
 
